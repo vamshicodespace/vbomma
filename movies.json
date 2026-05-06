@@ -1,5 +1,35 @@
 [
   {
+  "id": 51,
+  "title": "Pelli Choopulu",
+  "thumbnail": "https://sund-images.sunnxt.com/7766/1000x1500_PelliChupulu_7766_b5fed837-1fac-4911-839e-318ba656117f.jpg",
+  "video": "https://my-ott-movie-storage-123.s3.ap-south-1.amazonaws.com/movies/Vijay+Deverakonda/Pelli_Choopulu.mp4",
+  "description": "A carefree young man and an ambitious woman come together through an arranged marriage setup and unexpectedly build a successful food business.",
+  "director": "Tharun Bhascker",
+  "year": "2016",
+  "genre": "Romance, Comedy, Drama"
+},
+{
+  "id": 50,
+  "title": "Happy Raj",
+  "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScjZQOEvyCwjCnwk172ZsldtI9nXhT6HkgBw&s",
+  "video": "https://my-ott-movie-storage-123.s3.ap-south-1.amazonaws.com/movies/Other/Happy_Raj_FIXED.mp4",
+  "description": "A cheerful young man navigates friendship, love, and family struggles while chasing his dreams.",
+  "director": "Unknown",
+  "year": "2025",
+  "genre": "Drama, Family"
+},
+{
+  "id": 49,
+  "title": "Maayon",
+  "thumbnail": "https://m.media-amazon.com/images/S/pv-target-images/05448f4c1b4e86e643ca067e448f586f7ad0f1229ad4f2e4e748eb1b560b373e.jpg",
+  "video": "https://my-ott-movie-storage-123.s3.ap-south-1.amazonaws.com/movies/Other/Maayon.mp4",
+  "description": "An archaeologist uncovers dark secrets linked to an ancient temple and mysterious supernatural events.",
+  "director": "Kishore",
+  "year": "2022",
+  "genre": "Mystery, Thriller"
+} ,
+  {
   "id": 47,
   "title": "Dhurandhar: The Revenge",
   "thumbnail": "https://my-ott-movie-storage-123.s3.ap-south-1.amazonaws.com/thumbnails/Dubbed/Dhurandhar.jpeg",
@@ -12,7 +42,7 @@
   {
   "id": 46,
   "title": "Youth",
-  "thumbnail": "https://my-ott-movie-storage-123.s3.ap-south-1.amazonaws.com/thumbnails/Other/Youth.png",
+  "thumbnail": "https://cdn.district.in/movies-assets/images/cinema/Youth_Poster-65fdaac0-05a2-11f1-adea-2ddc896211a4.jpg",
   "video": "https://my-ott-movie-storage-123.s3.ap-south-1.amazonaws.com/movies/Other/Youth.mp4",
   "description": "Youth (2026) is a Tamil-language romantic comedy-drama released on March 19, 2026, directed by and starring Ken Karunas. The film follows Praveen on a quest for love during his 10th-grade school days. It is a coming-of-age story about a teenager trying to find true love.",
   "director": "Ken Karunas",
@@ -197,7 +227,7 @@
   "description": "A thief is forced to impersonate an international criminal.",
   "director": "Meher Ramesh",
   "year": "2009",
-  "genre": ", Thriller"
+  "genre": "Action, Thrille"
 },
 {
   "id": 12,
