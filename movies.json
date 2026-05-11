@@ -1,5 +1,15 @@
 [
   {
+  "id": 19,
+  "title": "Love Insurance Kompany",
+  "thumbnail": "https://m.media-amazon.com/images/M/MV5BOGViNGU3MWUtNDY0Zi00ZTJiLTg0MDUtZGNkN2ZkNjYwOWJhXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg",
+  "video": "https://my-ott-movie-storage-123.s3.ap-south-1.amazonaws.com/movies/Other/LIK.mkv",
+  "description": "A futuristic romantic comedy set in 2040 where technology and algorithms control relationships through a dating app called LIK.",
+  "director": "Vignesh Shivan",
+  "year": "2026",
+  "genre": "Romance, Sci-Fi, Comedy"
+},
+  {
     "id": 18,
     "title": "Swapped",
     "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQGiVugmPpTfOus0Dr_L9s6UP0F1aWZlN3Hw&s",
