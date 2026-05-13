@@ -6,17 +6,22 @@ const multer = require("multer");
 
 const app = express();
 
-app.use(cors());
+
+// ================= CORS (allow only your frontend) =================
+app.use(cors({
+  origin: "https://vbomma.online"
+}));
+
 app.use(express.json());
 
 
 // ================= 🔒 SECURITY MIDDLEWARE =================
-// Allow ONLY your domain (blocks direct Render access)
+// Allow ONLY your API domain (blocks direct Render access)
 app.use((req, res, next) => {
-
   const host = req.headers.host;
 
-  if (host !== "api.vbomma.online") {
+  // allow only api.vbomma.online (handles cases like :443)
+  if (!host || !host.includes("api.vbomma.online")) {
     return res.status(403).send("Blocked: Direct access not allowed");
   }
 
@@ -46,15 +51,12 @@ function saveMovies(movies) {
 
 // ================= MULTER STORAGE =================
 const storage = multer.diskStorage({
-
   destination: (req, file, cb) => {
     cb(null, "uploads/");
   },
-
   filename: (req, file, cb) => {
     cb(null, Date.now() + "-" + file.originalname);
   }
-
 });
 
 const upload = multer({ storage });
@@ -68,16 +70,13 @@ app.get("/", (req, res) => {
 
 // ================= GET MOVIES =================
 app.get("/movies", (req, res) => {
-
   const movies = readMovies();
   res.json(movies);
-
 });
 
 
 // ================= UPLOAD MOVIE =================
 app.post("/upload", upload.single("movie"), (req, res) => {
-
   const movies = readMovies();
 
   const newMovie = {
@@ -94,7 +93,6 @@ app.post("/upload", upload.single("movie"), (req, res) => {
     message: "Movie Uploaded Successfully",
     movie: newMovie
   });
-
 });
 
 
