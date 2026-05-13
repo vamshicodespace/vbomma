@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Watch Movie</title>
+
+  <style>
+    body {
+      margin: 0;
+      background: black;
+      color: white;
+      font-family: Arial, sans-serif;
+      background-color: rgb(20, 20, 20);
+    }
+
+    .container {
+      padding: 15px;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    /* TITLE */
+    h2 {
+      font-size: 22px;
+      margin-bottom: 10px;
+    }
+
+    /* VIDEO */
+    video {
+      width: 100%;
+      max-height: 65vh;
+      margin-top: 15px;
+      border-radius: 6px;
+    }
+
+    /* DETAILS LAYOUT */
+    .details-wrapper {
+      display: flex;
+      gap: 199px;
+      margin-top: 15px;
+      align-items: flex-start;
+      flex-wrap: wrap; /* important for responsiveness */
+      
+    }
+
+    /* POSTER */
+    .poster img {
+      width: 150px;
+      max-width: 100%;
+      border-radius: 6px;
+    }
+
+    /* TEXT DETAILS */
+    .details {
+      font-size: 14px;
+      flex: 1;
+      min-width: 200px;
+    }
+
+    .details p {
+      margin: 6px 0;
+      line-height: 1.4;
+    }
+
+    .label {
+      color: #1cda6b;
+      font-weight: bold;
+    }
+
+    /* BACK BUTTON */
+    .back {
+      margin-top: 15px;
+      color: #1cda6b;
+      cursor: pointer;
+      display: inline-block;
+    }
+
+    /* ================= MOBILE ================= */
+    @media (max-width: 600px) {
+
+      h2 {
+        font-size: px;
+        text-align: center;
+      }
+
+      .details-wrapper {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+
+      .poster img {
+        width: 120px;
+      }
+
+      .details {
+        font-size: 13px;
+      }
+
+      video {
+        max-height: 40vh;
+      }
+    }
+
+    /* ================= TABLET ================= */
+    @media (min-width: 601px) and (max-width: 900px) {
+
+      .details-wrapper {
+        gap: 20px;
+      }
+
+      .poster img {
+        width: 140px;
+      }
+
+      video {
+        max-height: 55vh;
+      }
+    }
+
+    /* ================= DESKTOP ================= */
+    @media (min-width: 901px) {
+
+      .details-wrapper {
+        gap: 25px;
+      }
+
+      .poster img {
+        width: 180px;
+      }
+
+      video {
+        max-height: 70vh;
+      }
+
+      h2 {
+        font-size: 26px;
+      }
+    }
+
+  </style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <h2 id="title"></h2>
+
+  <!-- DETAILS -->
+  <div class="details-wrapper">
+
+    <div class="poster">
+      <img id="posterImg" src="" alt="Movie Poster">
+    </div>
+
+    <div class="details">
+      <p><span class="label">Description:</span> <span id="desc"></span></p>
+      <p><span class="label">Director:</span> <span id="director"></span></p>
+      <p><span class="label">Year:</span> <span id="year"></span></p>
+      <p><span class="label">Genre:</span> <span id="genre"></span></p>
+    </div>
+
+  </div>
+
+  <!-- VIDEO -->
+  <video id="player" controls autoplay>
+    <source id="source" src="" type="video/mp4">
+  </video>
+
+  <!-- BACK -->
+  <div class="back" onclick="history.back()">⬅ Back to Home</div>
+
+</div>
+
+<script>
+  const params = new URLSearchParams(window.location.search);
+
+  document.getElementById("title").innerText = params.get("title");
+  document.getElementById("source").src = params.get("video");
+  document.getElementById("posterImg").src = params.get("thumb");
+
+  document.getElementById("desc").innerText = params.get("desc");
+  document.getElementById("director").innerText = params.get("director");
+  document.getElementById("year").innerText = params.get("year");
+  document.getElementById("genre").innerText = params.get("genre");
+
+  document.getElementById("player").load();
+</script>
+
+</body>
+</html>

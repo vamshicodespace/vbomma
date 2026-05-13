@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>V-Bomma</title>
+
+<style>
+
+body{
+background:#000;
+font-family:Arial, sans-serif;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+color:white;
+margin:0;
+}
+
+.box{
+background:#1c1c1c;
+padding:20px;
+border-radius:8px;
+text-align:center;
+width:280px;
+box-shadow:0 0 15px rgba(0,0,0,0.6);
+}
+
+h2{
+margin-bottom:10px;
+}
+
+p{
+font-size:14px;
+margin-bottom:20px;
+}
+
+button{
+background:#59f14e;
+border:none;
+padding:10px 25px;
+font-size:15px;
+border-radius:5px;
+cursor:pointer;
+}
+
+button:hover{
+background:#78f894;
+}
+
+a{
+color:#ffc107;
+text-decoration:none;
+font-size:13px;
+}
+
+a:hover{
+text-decoration:underline;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="box">
+
+<h2>Accept Terms</h2>
+
+<p>
+You must accept our terms before entering the website.
+<br><br>
+<a href="terms-full.html">View Terms & Conditions</a>
+</p>
+
+<button onclick="enterSite()">Accept</button>
+
+</div>
+
+<script>
+
+function enterSite(){
+localStorage.setItem("acceptedTerms","true");
+window.location.href="index.html";
+}
+
+</script>
+
+</body>
+</html>

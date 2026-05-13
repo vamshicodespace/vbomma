@@ -1,0 +1,204 @@
+/* =========================
+   RESET
+========================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* =========================
+   BODY
+========================= */
+body {
+  background-color: rgb(20, 20, 20);
+  color: white;
+  font-family: Arial, sans-serif;
+  overflow-x: hidden;
+}
+
+/* =========================
+   NAVBAR
+========================= */
+.navbar {
+  background: #1a1a1a;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+}
+
+.navbar-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 15px;
+}
+
+.menu {
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.logo {
+  color: #1cda6b;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+/* SEARCH */
+.navbar input {
+  width: 200px;
+  padding: 7px;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+}
+
+/* =========================
+   HERO
+========================= */
+.hero {
+  text-align: center;
+  padding: 30px 15px;
+  color: #1cda6b;
+}
+
+.hero p {
+  margin-top: 10px;
+  color: #ccc;
+}
+
+/* =========================
+   SEO CONTENT
+========================= */
+.seo-content {
+  padding: 10px 15px;
+  color: #aaa;
+  text-align: center;
+}
+
+/* =========================
+   MOVIE GRID
+========================= */
+.movies {
+  display: grid;
+  gap: 15px;
+  padding: 15px;
+}
+
+/* CARD */
+.card {
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: scale(1.08);
+  box-shadow: 0 15px 40px rgba(0,0,0,0.7);
+  z-index: 5;
+}
+
+/* IMAGE */
+.card img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+}
+
+/* TITLE */
+.card h3 {
+  font-size: 14px;
+  padding: 8px;
+  text-align: center;
+  color: #000;
+}
+
+/* PLAY ICON */
+.card::after {
+  content: "▶";
+  position: absolute;
+  font-size: 40px;
+  color: white;
+  top: 45%;
+  left: 45%;
+  opacity: 0;
+  transition: 0.3s;
+}
+
+.card:hover::after {
+  opacity: 1;
+}
+
+/* =========================
+   RESPONSIVE GRID
+========================= */
+
+/* Mobile */
+@media (max-width: 600px) {
+  .movies {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Tablet */
+@media (min-width: 601px) and (max-width: 900px) {
+  .movies {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Desktop */
+@media (min-width: 901px) {
+  .movies {
+    grid-template-columns: repeat(5, 1fr);
+    margin: 0 300px 0 300px;
+  }
+}
+
+/* =========================
+   LOADER (IMPORTANT)
+========================= */
+#loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.6s ease, visibility 0.6s ease;
+}
+
+/* SPINNER */
+.spinner {
+  width: 60px;
+  height: 60px;
+  border: 5px solid rgba(255,255,255,0.1);
+  border-top: 5px solid #1cda6b;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+/* SPIN */
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* HIDE LOADER */
+#loader.hide {
+  opacity: 0;
+  visibility: hidden;
+}
