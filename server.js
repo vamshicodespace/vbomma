@@ -11,22 +11,13 @@ app.use(express.json());
 
 
 // ================= 🔒 SECURITY MIDDLEWARE =================
-// Allow ONLY Cloudflare + your domain
+// Allow ONLY your domain (blocks direct Render access)
 app.use((req, res, next) => {
 
-  // Allow root for testing
-  if (req.path === "/") return next();
+  const host = req.headers.host;
 
-  const allowedHost = "api.vbomma.online";
-
-  // Block direct Render access
-  if (req.headers.host !== allowedHost) {
-    return res.status(403).send("Forbidden");
-  }
-
-  // Ensure request comes via Cloudflare
-  if (!req.headers["cf-connecting-ip"]) {
-    return res.status(403).send("Direct access blocked");
+  if (host !== "api.vbomma.online") {
+    return res.status(403).send("Blocked: Direct access not allowed");
   }
 
   next();
@@ -79,7 +70,6 @@ app.get("/", (req, res) => {
 app.get("/movies", (req, res) => {
 
   const movies = readMovies();
-
   res.json(movies);
 
 });
@@ -91,16 +81,13 @@ app.post("/upload", upload.single("movie"), (req, res) => {
   const movies = readMovies();
 
   const newMovie = {
-
     id: Date.now(),
     title: req.body.title,
     thumbnail: req.body.thumbnail,
     video: `/uploads/${req.file.filename}`
-
   };
 
   movies.push(newMovie);
-
   saveMovies(movies);
 
   res.status(201).json({
