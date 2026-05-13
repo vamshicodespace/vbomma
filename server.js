@@ -2,49 +2,118 @@ const express = require("express");
 const cors = require("cors");
 const fs = require("fs");
 const path = require("path");
+const multer = require("multer");
 
 const app = express();
-app.use(cors());
-app.use(express.json()); // 🔴 REQUIRED to add movies
 
+app.use(cors());
+app.use(express.json());
+
+
+// ================= 🔒 SECURITY MIDDLEWARE =================
+// Allow ONLY Cloudflare + your domain
+app.use((req, res, next) => {
+
+  // Allow root for testing
+  if (req.path === "/") return next();
+
+  const allowedHost = "api.vbomma.online";
+
+  // Block direct Render access
+  if (req.headers.host !== allowedHost) {
+    return res.status(403).send("Forbidden");
+  }
+
+  // Ensure request comes via Cloudflare
+  if (!req.headers["cf-connecting-ip"]) {
+    return res.status(403).send("Direct access blocked");
+  }
+
+  next();
+});
+
+
+// ================= PATH =================
 const moviesPath = path.join(__dirname, "movies.json");
 
-// Helper function to read movies fresh every time
+
+// ================= STATIC FOLDERS =================
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+
+
+// ================= READ MOVIES =================
 function readMovies() {
   return JSON.parse(fs.readFileSync(moviesPath, "utf-8"));
 }
 
-// Test route
+
+// ================= SAVE MOVIES =================
+function saveMovies(movies) {
+  fs.writeFileSync(moviesPath, JSON.stringify(movies, null, 2));
+}
+
+
+// ================= MULTER STORAGE =================
+const storage = multer.diskStorage({
+
+  destination: (req, file, cb) => {
+    cb(null, "uploads/");
+  },
+
+  filename: (req, file, cb) => {
+    cb(null, Date.now() + "-" + file.originalname);
+  }
+
+});
+
+const upload = multer({ storage });
+
+
+// ================= TEST ROUTE =================
 app.get("/", (req, res) => {
   res.send("OTT Backend Running");
 });
 
-// GET movies
+
+// ================= GET MOVIES =================
 app.get("/movies", (req, res) => {
+
   const movies = readMovies();
+
   res.json(movies);
+
 });
 
-// ADD movie (NEW 🔥)
-app.post("/movies", (req, res) => {
+
+// ================= UPLOAD MOVIE =================
+app.post("/upload", upload.single("movie"), (req, res) => {
+
   const movies = readMovies();
 
   const newMovie = {
-    id: movies.length + 1,
+
+    id: Date.now(),
     title: req.body.title,
     thumbnail: req.body.thumbnail,
-    video: req.body.video
+    video: `/uploads/${req.file.filename}`
+
   };
 
   movies.push(newMovie);
 
-  fs.writeFileSync(moviesPath, JSON.stringify(movies, null, 2));
+  saveMovies(movies);
 
-  res.status(201).json(newMovie);
+  res.status(201).json({
+    message: "Movie Uploaded Successfully",
+    movie: newMovie
+  });
+
 });
 
-// Start server (INTERNET SAFE)
+
+// ================= START SERVER =================
 const PORT = process.env.PORT || 5000;
+
 app.listen(PORT, () => {
   console.log("Backend running on port " + PORT);
 });
