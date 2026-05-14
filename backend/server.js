@@ -10,41 +10,32 @@ app.use(cors());
 app.use(express.json());
 
 
-// ================= 🔒 SECURITY MIDDLEWARE =================
-// Allow ONLY your domain (blocks direct Render access)
-app.use((req, res, next) => {
-
-  const host = req.headers.host;
-
-  if (host !== "api.vbomma.online") {
-    return res.status(403).send("Blocked: Direct access not allowed");
-  }
-
-  next();
-});
-
-
 // ================= PATH =================
+
 const moviesPath = path.join(__dirname, "movies.json");
 
 
 // ================= STATIC FOLDERS =================
+
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 
 // ================= READ MOVIES =================
+
 function readMovies() {
   return JSON.parse(fs.readFileSync(moviesPath, "utf-8"));
 }
 
 
 // ================= SAVE MOVIES =================
+
 function saveMovies(movies) {
   fs.writeFileSync(moviesPath, JSON.stringify(movies, null, 2));
 }
 
 
 // ================= MULTER STORAGE =================
+
 const storage = multer.diskStorage({
 
   destination: (req, file, cb) => {
@@ -61,33 +52,43 @@ const upload = multer({ storage });
 
 
 // ================= TEST ROUTE =================
+
 app.get("/", (req, res) => {
   res.send("OTT Backend Running");
 });
 
 
 // ================= GET MOVIES =================
+
 app.get("/movies", (req, res) => {
 
   const movies = readMovies();
+
   res.json(movies);
 
 });
 
 
 // ================= UPLOAD MOVIE =================
+
 app.post("/upload", upload.single("movie"), (req, res) => {
 
   const movies = readMovies();
 
   const newMovie = {
+
     id: Date.now(),
+
     title: req.body.title,
+
     thumbnail: req.body.thumbnail,
+
     video: `/uploads/${req.file.filename}`
+
   };
 
   movies.push(newMovie);
+
   saveMovies(movies);
 
   res.status(201).json({
@@ -99,13 +100,11 @@ app.post("/upload", upload.single("movie"), (req, res) => {
 
 
 // ================= START SERVER =================
+
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
+
   console.log("Backend running on port " + PORT);
+
 });
-
-
-
-
-
